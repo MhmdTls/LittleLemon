@@ -150,3 +150,8 @@ REST_FRAMEWORK = {
     # ... other settings
 }
 
+STATICFILES_DIRS = [
+    BASE_DIR / "restaurant" / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
