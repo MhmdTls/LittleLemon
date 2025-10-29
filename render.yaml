@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: littlelemon
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn littlelemon.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: littlelemon-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: "littlelemon-sm3s.onrender.com"
+    autoDeploy: true
