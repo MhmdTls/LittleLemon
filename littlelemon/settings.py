@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -26,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gk68p2((@9&5#qff(vws^dr9q!=5lg@h9+7!o#9m2b*c_i*@=a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
@@ -152,7 +153,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # settings.py
 
-import dj_database_url
+
 
 DATABASES = {
     'default': dj_database_url.config(
