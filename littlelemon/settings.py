@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-gk68p2((@9&5#qff(vws^dr9q!=5lg@h9+7!o#9m2b*c_i*@=a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
@@ -82,18 +83,10 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'LittleLemon',     # your database name
-        'USER': 'root',            # your MySQL username
-        'PASSWORD': 'Mhmd@tls12',# your MySQL password
-        'HOST': '127.0.0.1',       # localhost
-        'PORT': '3306',
-        'OPTIONS': {
-    'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-}
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')  # <-- Render sets this env variable automatically
 
-    }
+    )
 }
 
 
@@ -163,6 +156,6 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://username:password@host:port/dbname'
+        default='postgresql://littlelemon_m318_user:HCd9esQAhh64PPtN9VnPuCLeIqdRDhTu@dpg-d40vne15pdvs73dfen0g-a.oregon-postgres.render.com/littlelemon_m318'
     )
 }
