@@ -155,3 +155,14 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+# settings.py
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://username:password@host:port/dbname'
+    )
+}
